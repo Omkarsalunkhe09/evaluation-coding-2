@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+    <h1>MENU</h1>
+    <div id="cc">Cart Count :- <span id="crc">0</span></div>
+    <a href="cart2.html">Go to cart</a>
+    <div id="ct">
+
+    </div>
+</body>
+</html>
+<script>
+    var count = 0;
+    var cart = (JSON.parse(localStorage.getItem("cartitems"))) || [];
+
+    async function getmenu(){
+        try{
+            let res = await fetch(
+                "https://www.themealdb.com/api/json/v1/1/search.php?s=chicken"
+            );
+            let data = await res.json();
+           var user = data.meals;
+            console.log(user)
+           for(var i = 0; i<19; i++){
+            user.shift();
+           }
+           appnddata(user)
+          
+        }
+        catch(err){
+            console.log("err");
+        }
+    }
+
+    getmenu();
+
+    function appnddata(user){
+        user.map(function(elem){
+            var img = document.createElement("img");
+            img.src = elem.strMealThumb;
+
+            var name = document.createElement("p");
+            name.innerText=elem.strMeal;
+
+            var x = Math.floor((Math.random()*100)+400)
+            var n = document.createElement("p")
+             n.innerText ="$"+x;
+
+            var bt = document.createElement("button")
+            bt.innerText="Add To Cart"
+            bt.addEventListener("click", function(){
+                count++;
+                document.querySelector("#crc").innerHTML="";
+                discount();
+                addcart(elem,x);
+                // add(elem.strMealThumb,elem.strMeal,x);
+            })
+
+          
+
+            var div = document.createElement("div");
+
+            div.append(img,name,n,bt)
+
+            document.querySelector("#ct").append(div);
+          })
+    }
+
+    function discount(){
+        document.querySelector("#crc").innerHTML=count;
+    }
+    
+    function addcart(elem){
+        cart.push(elem);
+        console.log(elem);
+        localStorage.setItem("cartitems", JSON.stringify(cart));
+    }
+    // function add(img,name,n){
+    //     console.log(n)
+    //     console.log(name)
+
+
+    //   var obj = {
+    //       image:img,
+    //       name:name,
+    //       price:n,
+    //   }
+
+    //   arr.push(obj);
+
+    //   console.log(arr);
+
+    //   localStorage.setItem("fooditems", JSON.stringify(arr));
+
+    // }
+
+    
+</script>

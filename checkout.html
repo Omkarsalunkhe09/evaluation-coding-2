@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #cont{
+            width: 90%;
+            height: 500px;
+            border: 1px solid red;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="cont">
+        Enter your Address = <input type="text" name="" id="">
+        <input type="submit" name="" id="sub">
+    </div>
+</body>
+</html>
+<script>
+    document.querySelector("#sub").addEventListener("click", function(){
+        alert("order Placed");
+
+        var myTimeout = setTimeout(msg1, 3000);
+
+function msg1() {
+  alert("Order is been coocked");
+}
+
+var myTimeout = setTimeout(msg2, 8000);
+
+function msg2() {
+  alert("Your Order is ready");
+}
+
+var myTimeout = setTimeout(msg3, 12000);
+
+function msg3() {
+  alert("Order is out for delivery");
+}
+    })
+   
+</script>
